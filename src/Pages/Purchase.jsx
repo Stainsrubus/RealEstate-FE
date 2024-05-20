@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HouseCard from '../Components/HouseCard';
 import { useNavigate } from 'react-router-dom';
+import AxiosService from '../utils/ApiService';
 
 const Purchase = () => {
   const [houseData, setHouseData] = useState([]);
@@ -9,20 +10,18 @@ const Purchase = () => {
   useEffect(() => {
     const fetchHouseData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/houses');
-        if (!response.ok) {
-          throw new Error('Failed to fetch house data');
+        const res = await AxiosService.get("/lasthouses");
+        if (res.status === 200) {
+          const houseData = res.data.houses;
+          setHouseData(houseData);
         }
-        const data = await response.json();
-        setHouseData(data.houses);
       } catch (error) {
-        console.error('Error fetching house data:', error);
+        console.error("Failed to fetch last four houses:", error);
       }
     };
 
     fetchHouseData();
   }, []);
-
   return (
     <div className="container mx-auto pt-28">
       <div className="bg-yellow-400 shadow ml-5 hover:scale-110 duration-300 transition cursor-pointer rounded-full h-10 w-10 flex justify-center items-center">

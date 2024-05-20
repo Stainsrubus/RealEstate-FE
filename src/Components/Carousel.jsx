@@ -2,6 +2,7 @@ import React,{useEffect,useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AxiosService from "../utils/ApiService";
 
 const Carousel = () => {
 const [recentProjects, setRecentProjects] = useState([]);
@@ -9,15 +10,10 @@ const [recentProjects, setRecentProjects] = useState([]);
 useEffect(() => {
   const fetchProjects = async () => {
     try {
-      const response = await fetch('http://localhost:8000/houses');
-      if (!response.ok) {
-        throw new Error('Failed to fetch projects');
-      }
-      const data = await response.json();
-      if (Array.isArray(data.houses)) {
-        setRecentProjects(data.houses);
-      } else {
-        console.error('Invalid data format:', data);
+      const res = await AxiosService.get("/houses");
+      if (res.status === 200) {
+        const houseData = res.data.houses;
+        setRecentProjects(houseData);
       }
     } catch (err) {
       console.error('Error fetching projects:', err);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AxiosService from '../utils/ApiService';
 
 function Find() {
   const [location, setLocation] = useState('');
@@ -20,7 +21,7 @@ function Find() {
   useEffect(() => {
     const fetchHouseData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/houses');
+        const response = await AxiosService.get('/houses');
         if (!response.ok) {
           throw new Error('Failed to fetch house data');
         }
@@ -37,7 +38,7 @@ function Find() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/findByLocation?location=${location}`);
+      const response = await AxiosService.get(`/findByLocation?location=${location}`);
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }
