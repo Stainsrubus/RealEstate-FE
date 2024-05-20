@@ -16,7 +16,7 @@ export default {
     },
     extend: {
       backgroundImage: theme => ({
-        'hero-bg': "url('https://pbs.twimg.com/media/FZTnhvwUsAEzCsn.jpg:large')",
+        'hero-bg': "url('https://i0.wp.com/cms.interiorcompany.com/wp-content/uploads/2023/12/ultra-modern-glass-normal-house-front-elevation-design-for-2-floor-building.png?ssl=1')",
       }),
       screens:{
         'lg':{'max':'2030px'},
