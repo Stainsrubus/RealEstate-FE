@@ -16,7 +16,7 @@ export default {
     },
     extend: {
       backgroundImage: theme => ({
-        'hero-bg': "url('./src/assets/hero-bg.jpg')",
+        'hero-bg': "url('https://pbs.twimg.com/media/FZTnhvwUsAEzCsn.jpg:large')",
       }),
       screens:{
         'lg':{'max':'2030px'},
